@@ -11,9 +11,24 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{0F6B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{2424AA4F-51A7-454E-9EF2-2CC69A84ACA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Services.Book", "Library.Services,Book\Library.Services.Book.csproj", "{ADDE14A5-B201-433C-98AE-4C7073896073}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADDE14A5-B201-433C-98AE-4C7073896073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDE14A5-B201-433C-98AE-4C7073896073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDE14A5-B201-433C-98AE-4C7073896073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDE14A5-B201-433C-98AE-4C7073896073}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ADDE14A5-B201-433C-98AE-4C7073896073} = {B64C178E-A162-4363-8E88-CAE88DAB7297}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E38D57B-BC43-4916-8A6A-F50591677DA7}
