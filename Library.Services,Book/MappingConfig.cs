@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Library.Services_Book.Models;
-using Library.Services_Book.Models.Dto;
+using Library.Services.Book.Models;
+using Library.Services.Book.Models.Dto;
 
-namespace Library.Services_Book
+namespace Library.Services.Book
 {
     public static class MappingConfig
     {

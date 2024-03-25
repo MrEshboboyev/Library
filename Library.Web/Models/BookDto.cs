@@ -1,4 +1,4 @@
-﻿namespace Library.Services.Book.Models.Dto
+﻿namespace Library.Web.Models
 {
     public class BookDto
     {

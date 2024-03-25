@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Library.Services_Book</RootNamespace>
+    <RootNamespace>Library.Services.Book</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

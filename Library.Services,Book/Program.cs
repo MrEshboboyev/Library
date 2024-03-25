@@ -1,6 +1,6 @@
 using AutoMapper;
-using Library.Services_Book;
-using Library.Services_Book.Data;
+using Library.Services.Book;
+using Library.Services.Book.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
