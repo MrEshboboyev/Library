@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Library.Services.Book.Data;
-using Library.Services.Book.Models;
-using Library.Services.Book.Models.Dto;
+using Library.Services.BookAPI.Data;
+using Library.Services.BookAPI.Models;
+using Library.Services.BookAPI.Models.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Library.Services.Book.Controllers
+namespace Library.Services.BookAPI.Controllers
 {
     [Route("api/book")]
     [ApiController]

@@ -1,6 +1,6 @@
-@Library.Services.Book_HostAddress = http://localhost:5041
+@Library.Services.BookAPI_HostAddress = http://localhost:5041
 
-GET {{Library.Services.Book_HostAddress}}/weatherforecast/
+GET {{Library.Services.BookAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

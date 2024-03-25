@@ -11,8 +11,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
+// adding HttpClient
+builder.Services.AddHttpClient<IBookService, BookService>();
+
 // adding lifetime for services
 builder.Services.AddScoped<IBaseService, BaseService>();
+builder.Services.AddScoped<IBookService, BookService>();
 
 // adding urls
 SD.BookAPIBase = builder.Configuration["ServiceUrls:BookAPI"];
