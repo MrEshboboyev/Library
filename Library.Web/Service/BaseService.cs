@@ -58,6 +58,8 @@ namespace Library.Web.Service
                 {
                     case HttpStatusCode.Forbidden:
                         return new ResponseDto { IsSuccess = false, Message = "Access Denied" };
+                    case HttpStatusCode.BadRequest:
+                        return new ResponseDto { IsSuccess = false, Message = "Bad Request" };
                     case HttpStatusCode.Unauthorized:
                         return new ResponseDto { IsSuccess = false, Message = "Unauthorized" };
                     case HttpStatusCode.NotFound:

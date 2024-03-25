@@ -10,13 +10,13 @@ namespace Library.Services.BookAPI.Controllers
 {
     [Route("api/book")]
     [ApiController]
-    public class BooksController : ControllerBase
+    public class BooksAPIController : ControllerBase
     {
         // DI for database
         private readonly AppDbContext _db;
         private IMapper _mapper;
         private ResponseDto _response;
-        public BooksController(AppDbContext db,
+        public BooksAPIController(AppDbContext db,
             IMapper mapper)
         {
             _db = db;
