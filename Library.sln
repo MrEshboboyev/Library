@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Web", "Library.Web\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library.Services.BookAPI", "Library.Services.Book\Library.Services.BookAPI.csproj", "{E8959021-AAB8-456D-9FF3-177F3ED31F99}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Services.AuthAPI", "Library.Services.AuthAPI\Library.Services.AuthAPI.csproj", "{C8FF2786-DBDD-42C1-B0ED-06CB4826475F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{E8959021-AAB8-456D-9FF3-177F3ED31F99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8959021-AAB8-456D-9FF3-177F3ED31F99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8959021-AAB8-456D-9FF3-177F3ED31F99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FF2786-DBDD-42C1-B0ED-06CB4826475F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FF2786-DBDD-42C1-B0ED-06CB4826475F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FF2786-DBDD-42C1-B0ED-06CB4826475F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FF2786-DBDD-42C1-B0ED-06CB4826475F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{079FA4B7-FF95-4305-9DCE-03F2DEA09A2D} = {58D2EEC4-B8C3-4E41-A3E4-67BC12D29DA9}
 		{E8959021-AAB8-456D-9FF3-177F3ED31F99} = {B64C178E-A162-4363-8E88-CAE88DAB7297}
+		{C8FF2786-DBDD-42C1-B0ED-06CB4826475F} = {B64C178E-A162-4363-8E88-CAE88DAB7297}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4E38D57B-BC43-4916-8A6A-F50591677DA7}
