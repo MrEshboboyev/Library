@@ -26,7 +26,7 @@ namespace Library.Services.AuthAPI.Service
             throw new NotImplementedException();
         }
 
-        public async Task<UserDto> Register(RegistrationRequestDto registrationRequestDto)
+        public async Task<string> Register(RegistrationRequestDto registrationRequestDto)
         {
             ApplicationUser user = new()
             {
@@ -51,14 +51,14 @@ namespace Library.Services.AuthAPI.Service
                         Id = userToReturn.Id
                     };
 
-                    return userDto;
+                    return "";
                 }
             }
             catch (Exception ex)
             {
             }
 
-            return new UserDto();
+            return "Error encountered";
         }
     }
 }
