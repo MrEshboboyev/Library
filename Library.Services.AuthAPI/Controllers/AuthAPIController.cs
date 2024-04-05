@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Library.Services.AuthAPI.Models.Dto;
+using Library.Services.AuthAPI.Service.IService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Services.AuthAPI.Controllers
@@ -7,6 +9,14 @@ namespace Library.Services.AuthAPI.Controllers
     [ApiController]
     public class AuthAPIController : ControllerBase
     {
+        private IAuthService _authService;
+        protected ResponseDto _response;
+
+        public AuthAPIController(IAuthService authService)
+        {
+            _authService = authService;
+            _response = new();
+        }
 
         // Register
         [HttpPost("register")]
