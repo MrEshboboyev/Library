@@ -1,10 +1,9 @@
-﻿using Library.Services.AuthAPI.Models.Dto;
-using Microsoft.AspNetCore.Identity.Data;
+﻿using Library.Services.AuthAPI.Models;
 
 namespace Library.Services.AuthAPI.Service.IService
 {
     public interface IJwtTokenGenerator
     {
-        Task<string> GenerateToken(LoginRequestDto loginRequestDto); 
+        string GenerateToken(ApplicationUser applicationUser); 
     }
 }
