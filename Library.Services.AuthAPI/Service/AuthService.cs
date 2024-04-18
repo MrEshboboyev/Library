@@ -21,9 +21,37 @@ namespace Library.Services.AuthAPI.Service
             _roleManager = roleManager;
         }
 
-        public Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
+        public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
         {
-            throw new NotImplementedException();
+            // finding user by 'UserName'
+            var user = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == loginRequestDto.Username.ToLower());
+
+            bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
+
+            // checking exists [user] and valid password
+            if(!isValid && user == null)
+            {
+                return new LoginResponseDto() { User = null, Token = ""};
+            }
+
+            // if user was found, Generate JWT Token
+
+            // create UserDto for return loginResponseDto
+            UserDto userDto = new()
+            {
+                Id = user.Id,
+                Email = user.Email,
+                Name = user.Name,
+                PhoneNumber = user.PhoneNumber
+            };
+
+            LoginResponseDto loginResponseDto = new() 
+            {
+                User = userDto,
+                Token = ""
+            };
+
+            return loginResponseDto;
         }
 
         public async Task<string> Register(RegistrationRequestDto registrationRequestDto)
@@ -46,7 +74,7 @@ namespace Library.Services.AuthAPI.Service
                     UserDto userDto = new()
                     {
                         Email = user.Email,
-                        Name = userToReturn.FirstName + " " + userToReturn.LastName,
+                        Name = userToReturn.UserName,
                         PhoneNumber = userToReturn.PhoneNumber,
                         Id = userToReturn.Id
                     };
