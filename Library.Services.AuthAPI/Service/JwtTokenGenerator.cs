@@ -24,11 +24,11 @@ namespace Library.Services.AuthAPI.Service
 
             var key = Encoding.ASCII.GetBytes(_jwtOptions.Secret);
 
-            var claimList = new List<Claim>
+            var claimList = new List<Claim>()
             {
                 new Claim(JwtRegisteredClaimNames.Email, applicationUser.Email),
                 new Claim(JwtRegisteredClaimNames.Sub, applicationUser.Id),
-                new Claim(JwtRegisteredClaimNames.Name, applicationUser.Name),
+                new Claim(JwtRegisteredClaimNames.Name, applicationUser.UserName),
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor()
