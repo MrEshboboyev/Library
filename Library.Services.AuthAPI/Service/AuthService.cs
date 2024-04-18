@@ -27,7 +27,7 @@ namespace Library.Services.AuthAPI.Service
         }
 
         public async Task<string> Register(RegistrationRequestDto registrationRequestDto)
-        {
+         {
             ApplicationUser user = new()
             {
                 UserName = registrationRequestDto.Email,
@@ -52,6 +52,10 @@ namespace Library.Services.AuthAPI.Service
                     };
 
                     return "";
+                }
+                else
+                {
+                    return result.Errors.FirstOrDefault().Description;
                 }
             }
             catch (Exception ex)
