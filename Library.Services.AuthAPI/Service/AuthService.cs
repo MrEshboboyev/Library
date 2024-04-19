@@ -96,5 +96,27 @@ namespace Library.Services.AuthAPI.Service
 
             return "Error encountered";
         }
+
+        public async Task<bool> AssignRole(string email, string roleName)
+        {
+            // finding user
+            var user = _db.ApplicationUsers.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+
+            if(user != null)
+            {
+                if(!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
+                {
+                    // if role not exist, create new role
+                    _roleManager.CreateAsync(new IdentityRole() { Name = roleName }).GetAwaiter().GetResult();
+                }
+
+                // add 'user' role for user
+                 await _userManager.AddToRoleAsync(user, roleName);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
