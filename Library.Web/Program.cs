@@ -13,6 +13,7 @@ builder.Services.AddHttpContextAccessor();
 
 // adding HttpClient
 builder.Services.AddHttpClient<IBookService, BookService>();
+builder.Services.AddHttpClient<IAuthService, AuthService>();
 
 // adding lifetime for services
 builder.Services.AddScoped<IBaseService, BaseService>();
@@ -20,6 +21,7 @@ builder.Services.AddScoped<IBookService, BookService>();
 
 // adding urls
 SD.BookAPIBase = builder.Configuration["ServiceUrls:BookAPI"];
+SD.BookAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
 var app = builder.Build();
 

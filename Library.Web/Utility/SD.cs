@@ -3,6 +3,7 @@
     public static class SD
     {
         public static string BookAPIBase { get; set; }
+        public static string AuthAPIBase { get; set; }
 
         public enum ApiType
         {
