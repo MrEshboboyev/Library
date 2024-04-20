@@ -5,6 +5,10 @@
         public static string BookAPIBase { get; set; }
         public static string AuthAPIBase { get; set; }
 
+        // roles
+        public const string RoleAdmin = "ADMIN";
+        public const string RoleCustomer = "CUSTOMER";
+
         public enum ApiType
         {
             GET,
