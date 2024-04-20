@@ -3,6 +3,7 @@ using Library.Web.Service.IService;
 using Library.Web.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace Library.Web.Controllers
 {
@@ -20,12 +21,32 @@ namespace Library.Web.Controllers
             return View();
         }
 
+        #region Login actions
         [HttpGet]
         public IActionResult Login()
         {
             LoginRequestDto loginRequestDto = new();
             return View(loginRequestDto);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginRequestDto obj)
+        {
+            ResponseDto responseDto = await _authService.LoginAsync(obj);
+
+            if (responseDto != null && responseDto.IsSuccess)
+            {
+                LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("CustomError", responseDto.Message);
+                return View(obj);
+            }
+        }
+        #endregion
 
         #region Register actions
         [HttpGet]
@@ -49,7 +70,7 @@ namespace Library.Web.Controllers
 
             if (result != null && result.IsSuccess)
             {
-                if(!string.IsNullOrEmpty(obj.Role))
+                if(string.IsNullOrEmpty(obj.Role))
                 {
                     obj.Role = SD.RoleCustomer;
                 }
@@ -70,6 +91,8 @@ namespace Library.Web.Controllers
             };
 
             ViewBag.RoleList = roleList;
+
+            TempData["error"] = result.Message;
             return View(obj);
         }
         #endregion
