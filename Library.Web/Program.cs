@@ -18,10 +18,11 @@ builder.Services.AddHttpClient<IAuthService, AuthService>();
 // adding lifetime for services
 builder.Services.AddScoped<IBaseService, BaseService>();
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 // adding urls
 SD.BookAPIBase = builder.Configuration["ServiceUrls:BookAPI"];
-SD.BookAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
+SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
 
 var app = builder.Build();
 
