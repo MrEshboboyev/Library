@@ -1,6 +1,7 @@
 using Library.Web.Service;
 using Library.Web.Service.IService;
 using Library.Web.Utility;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,15 @@ builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITokenProvider, TokenProvider>();
 
+// configure cookie services
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.ExpireTimeSpan = TimeSpan.FromHours(10);
+        options.LoginPath = "/auth/login";
+        options.AccessDeniedPath = "/auth/accessDenied";
+    });
+
 // adding urls
 SD.BookAPIBase = builder.Configuration["ServiceUrls:BookAPI"];
 SD.AuthAPIBase = builder.Configuration["ServiceUrls:AuthAPI"];
@@ -40,6 +50,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
