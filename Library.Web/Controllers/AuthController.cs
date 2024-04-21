@@ -1,9 +1,14 @@
 ﻿using Library.Web.Models;
 using Library.Web.Service.IService;
 using Library.Web.Utility;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq.Expressions;
+using System.Security.Claims;
 
 namespace Library.Web.Controllers
 {
@@ -39,6 +44,9 @@ namespace Library.Web.Controllers
             if (responseDto != null && responseDto.IsSuccess)
             {
                 LoginResponseDto loginResponseDto = JsonConvert.DeserializeObject<LoginResponseDto>(Convert.ToString(responseDto.Result));
+
+                // sign in user
+                await SignInUser(loginResponseDto);
 
                 // set token
                 _tokenProvider.SetToken(loginResponseDto.Token);
@@ -108,5 +116,29 @@ namespace Library.Web.Controllers
             return View();
         }
         
+        // user sign in to the system
+        private async Task SignInUser(LoginResponseDto model)
+        {
+            var handler = new JwtSecurityTokenHandler();
+
+            // read token from backend
+            var jwt = handler.ReadJwtToken(model.Token);
+
+            // creating identity for old user
+            var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // adding claims
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Email,
+                jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub,
+                jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Sub).Value));
+            identity.AddClaim(new Claim(JwtRegisteredClaimNames.Name,
+                jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
+
+            // creating principal using identity
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
+        }
     }
 }
