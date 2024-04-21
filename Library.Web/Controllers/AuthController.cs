@@ -115,6 +115,19 @@ namespace Library.Web.Controllers
         {
             return View();
         }
+
+        // Logout action
+        public async Task<IActionResult> LogOut()
+        {
+            // clear token : this is IMPORTANT
+            _tokenProvider.ClearToken();
+
+            // sign out user
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+            // redirect to index page in Home
+            return RedirectToAction("Index", "Home");
+        }
         
         // user sign in to the system
         private async Task SignInUser(LoginResponseDto model)

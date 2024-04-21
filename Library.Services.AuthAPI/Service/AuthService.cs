@@ -32,7 +32,7 @@ namespace Library.Services.AuthAPI.Service
             bool isValid = await _userManager.CheckPasswordAsync(user, loginRequestDto.Password);
 
             // checking exists [user] and valid password
-            if(!isValid && user == null)
+            if(!isValid || user == null)
             {
                 return new LoginResponseDto() { User = null, Token = ""};
             }
