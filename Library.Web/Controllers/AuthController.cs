@@ -148,6 +148,12 @@ namespace Library.Web.Controllers
             identity.AddClaim(new Claim(JwtRegisteredClaimNames.Name,
                 jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Name).Value));
 
+            // adding other claims for user identity
+            identity.AddClaim(new Claim(ClaimTypes.Name,
+                jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
+            identity.AddClaim(new Claim(ClaimTypes.Role,
+                jwt.Claims.FirstOrDefault(u => u.Type == "role").Value));
+
             // creating principal using identity
             var principal = new ClaimsPrincipal(identity);
 
