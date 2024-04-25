@@ -1,5 +1,6 @@
 ﻿using Library.Web.Models;
 using Library.Web.Service.IService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,20 +16,10 @@ namespace Library.Web.Controllers
             _bookService = bookService;
         }
 
+        [Authorize]
         public async Task<IActionResult> BookIndex()
         {
-            List<BookDto> list = new();
-            ResponseDto? response = await _bookService.GetAllBooksAsync();
-            if (response.IsSuccess && response != null)
-            {
-                list = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Result));
-            }
-            else
-            {
-                TempData["error"] = response?.Message;
-            }
-
-            return View(list);
+            return View(await LoadBooksBasedOnLoggedInUser());
         }
 
         [HttpGet]
