@@ -2,6 +2,7 @@
 using Library.Web.Service.IService;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 
 namespace Library.Web.Controllers
@@ -131,6 +132,26 @@ namespace Library.Web.Controllers
                 TempData["error"] = response?.Message;
             }
             return View();
+        }
+
+        // private methods
+        private async Task<List<BookDto>> LoadBooksBasedOnLoggedInUser()
+        {
+            // getting user id
+            var userId = User.Claims.Where(u => u.Type == JwtRegisteredClaimNames.Sub).FirstOrDefault().Value;
+
+            // getting response from Backend
+            ResponseDto? response = await _bookService.GetBooksByUserIdAsync(userId);
+
+            if(response != null && response.IsSuccess)
+            {
+                // deserialize response for List<BookDto>
+                List<BookDto> bookDtos = JsonConvert.DeserializeObject<List<BookDto>>(Convert.ToString(response.Result));
+
+                return bookDtos;
+            }
+
+            return new List<BookDto>();
         }
     }
 }
