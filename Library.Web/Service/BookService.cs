@@ -41,6 +41,15 @@ namespace Library.Web.Service
             });
         }
 
+        public async Task<ResponseDto?> GetBooksByUserIdAsync(string userId)
+        {
+            return await _baseService.SendAsync(new RequestDto
+            {
+                ApiType = ApiType.GET,
+                Url = SD.BookAPIBase + "/api/book/GetBooks/" + userId
+            });
+        }
+
         public async Task<ResponseDto?> GetBookByIdAsync(int id)
         {
             return await _baseService.SendAsync(new RequestDto
