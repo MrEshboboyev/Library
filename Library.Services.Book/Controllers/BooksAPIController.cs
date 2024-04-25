@@ -24,6 +24,25 @@ namespace Library.Services.BookAPI.Controllers
             _mapper = mapper;
         }
 
+        // get user books by UserId
+        [HttpGet("GetBooks/{userId}")]
+        public ResponseDto? GetBooks(string userId)
+        {
+            try
+            {
+                IEnumerable<BookDto> books = _mapper.Map<IEnumerable<BookDto>>(_db.Books.Where(book => book.UserId == userId));
+
+                _response.Result = books;
+            }
+            catch(Exception ex)
+            {
+                _response.Message = ex.ToString();
+                _response.IsSuccess = false;
+            }
+
+            return _response;
+        }
+
         // get books
         [HttpGet]
         public ResponseDto? Get()
@@ -89,12 +108,21 @@ namespace Library.Services.BookAPI.Controllers
         {
             try
             {
-                Book obj = _mapper.Map<Book>(bookDto);
+                Book obj = _db.Books.FirstOrDefault(book => book.BookId == bookDto.BookId);
 
-                _db.Books.Update(obj);
-                _db.SaveChanges();
+                if(obj != null)
+                {
 
-                _response.Result = _mapper.Map<BookDto>(obj);
+                    _db.Books.Update(obj);
+                    _db.SaveChanges();
+
+                    _response.Result = _mapper.Map<BookDto>(obj);
+                }
+                else
+                {
+                    _response.Message = "Book not found";
+                    _response.IsSuccess = false;
+                }
             }
             catch (Exception ex)
             {
