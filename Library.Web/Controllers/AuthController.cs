@@ -51,7 +51,7 @@ namespace Library.Web.Controllers
                 // set token
                 _tokenProvider.SetToken(loginResponseDto.Token);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("BookIndex", "Books");
             }
             else
             {
