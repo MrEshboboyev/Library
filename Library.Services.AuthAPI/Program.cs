@@ -16,6 +16,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 
 // adding lifetime
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
 builder.Services.AddControllers();
