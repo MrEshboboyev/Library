@@ -108,21 +108,11 @@ namespace Library.Services.BookAPI.Controllers
         {
             try
             {
-                Book obj = _db.Books.FirstOrDefault(book => book.BookId == bookDto.BookId);
+                Book obj = _mapper.Map<Book>(bookDto);
+                _db.Books.Update(obj);
+                _db.SaveChanges();
 
-                if(obj != null)
-                {
-
-                    _db.Books.Update(obj);
-                    _db.SaveChanges();
-
-                    _response.Result = _mapper.Map<BookDto>(obj);
-                }
-                else
-                {
-                    _response.Message = "Book not found";
-                    _response.IsSuccess = false;
-                }
+                _response.Result = _mapper.Map<BookDto>(obj);
             }
             catch (Exception ex)
             {
