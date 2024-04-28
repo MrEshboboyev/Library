@@ -1,4 +1,5 @@
-﻿using Library.Services.AuthAPI.Data;
+﻿using AutoMapper;
+using Library.Services.AuthAPI.Data;
 using Library.Services.AuthAPI.Models;
 using Library.Services.AuthAPI.Models.Dto;
 using Library.Services.AuthAPI.Service.IService;
@@ -9,17 +10,20 @@ namespace Library.Services.AuthAPI.Service
     {
         // DI for Database
         private readonly AppDbContext _db;
+        private readonly IMapper _mapper;
 
-        public UserService(AppDbContext db)
+        public UserService(AppDbContext db,
+            IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ApplicationUser>> GetAllUsers()
+        public async Task<IEnumerable<UserDto>> GetAllUsers()
         {
             try
             {
-                IEnumerable<ApplicationUser> users = _db.ApplicationUsers.ToList();
+                IEnumerable<UserDto> users = _mapper.Map<IEnumerable<UserDto>>(_db.ApplicationUsers.ToList());
 
                 return users;
             }
@@ -27,14 +31,15 @@ namespace Library.Services.AuthAPI.Service
             {
             }
 
-            return new List<ApplicationUser>();
+            return new List<UserDto>();
         }
 
-        public async Task<ApplicationUser> GetUserByEmail(string email)
+        public async Task<UserDto> GetUserByEmail(string email)
         {
             try
             {
-                ApplicationUser user = _db.ApplicationUsers.FirstOrDefault(user => user.Email.ToLower() == email.ToLower());
+                UserDto user = _mapper.Map<UserDto>(_db.ApplicationUsers.FirstOrDefault(user => 
+                    user.Email.ToLower() == email.ToLower()));
 
                 if (user == null)
                     throw new Exception($"User with email '{email}' not found.");

@@ -5,7 +5,7 @@ namespace Library.Services.AuthAPI.Service.IService
 {
     public interface IUserService
     {
-        Task<IEnumerable<ApplicationUser>> GetAllUsers();
-        Task<ApplicationUser> GetUserByEmail(string email);
+        Task<IEnumerable<UserDto>> GetAllUsers();
+        Task<UserDto> GetUserByEmail(string email);
     }
 }

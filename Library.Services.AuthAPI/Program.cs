@@ -1,3 +1,5 @@
+using AutoMapper;
+using Library.Services.AuthAPI;
 using Library.Services.AuthAPI.Data;
 using Library.Services.AuthAPI.Models;
 using Library.Services.AuthAPI.Service;
@@ -13,6 +15,13 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+
+// configure MappingConfig
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 
 // adding lifetime
 builder.Services.AddScoped<IAuthService, AuthService>();

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<UserDto>
+<form asp-action="UserIndex">
+    <div class="card shadow border-0 mt-4">
+        <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1 class="text-white">Users List</h1>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="row pb-3">
+                <div class="col-6">
+                </div>
+            </div>
+            <table class="table table-bordered table-hover table-primary">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-list"></i> Id</th>
+                        <th><i class="fas fa-list"></i> Email</th>
+                        <th><i class="fas fa-list"></i> Name</th>
+                        <th><i class="fas fa-list"></i> PhoneNumber</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Id</td>
+                            <td>@user.Email</td>
+                            <td>@user.Name</td>
+                            <td>@user.PhoneNumber</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</form>
