@@ -64,6 +64,7 @@ namespace Library.Services.AuthAPI.Service
             ApplicationUser user = new()
             {
                 UserName = registrationRequestDto.Email,
+                Name = registrationRequestDto.Name,
                 Email = registrationRequestDto.Email,
                 NormalizedEmail = registrationRequestDto.Email.ToUpper(),
                 PhoneNumber = registrationRequestDto.PhoneNumber
